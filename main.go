@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
+
+	"github.com/Pratchaya0/auth-api-gin/routes"
+	"github.com/gin-gonic/gin"
 )
 
 func helloHandler(w http.ResponseWriter, r *http.Request) {
@@ -11,9 +13,9 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/", helloHandler)
-	fmt.Println("Starting server at port 8080")
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		log.Fatalf("Could not start server: %s\n", err.Error())
-	}
+	router := gin.Default()
+
+	routes.Auth2RouteSetup(router)
+
+	router.Run(":8080")
 }

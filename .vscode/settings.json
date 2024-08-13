@@ -2,6 +2,7 @@
     "CodeGPT.apiKey": "CodeGPT Plus Beta",
     "cSpell.words": [
         "dbname",
+        "godotenv",
         "gorm",
         "mypassword",
         "myuser",

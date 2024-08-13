@@ -39,17 +39,17 @@ func (ctrl *UserController) GetUserByUserName(c *gin.Context) {
 	helpers.WebResponseWithJSON(c, http.StatusOK, "OK", user)
 }
 
-func (ctrl *UserController) GetUserByProviderId(c *gin.Context) {
-	providerID := c.Param("id")
+// func (ctrl *UserController) GetUserByProviderId(c *gin.Context) {
+// 	providerID := c.Param("id")
 
-	user, err := ctrl.userUseCase.GetUserByProviderId(providerID)
-	if err != nil {
-		helpers.WebResponseWithJSON(c, http.StatusBadRequest, err.Error(), nil)
-		return
-	}
+// 	user, err := ctrl.userUseCase.GetUserByProviderId(providerID)
+// 	if err != nil {
+// 		helpers.WebResponseWithJSON(c, http.StatusBadRequest, err.Error(), nil)
+// 		return
+// 	}
 
-	helpers.WebResponseWithJSON(c, http.StatusOK, "OK", user)
-}
+// 	helpers.WebResponseWithJSON(c, http.StatusOK, "OK", user)
+// }
 
 func (ctrl *UserController) Update(c *gin.Context) {
 	var request models.User
@@ -67,13 +67,13 @@ func (ctrl *UserController) Update(c *gin.Context) {
 	helpers.WebResponseWithJSON(c, http.StatusOK, "OK", request)
 }
 
-func (ctrl *UserController) Delete(c *gin.Context) {
-	id := c.Param("id")
+// func (ctrl *UserController) Delete(c *gin.Context) {
+// 	id := c.Param("id")
 
-	if err := ctrl.userUseCase.DeleteUser(id); err != nil {
-		helpers.WebResponseWithJSON(c, http.StatusBadRequest, err.Error(), nil)
-		return
-	}
+// 	if err := ctrl.userUseCase.DeleteUser(id); err != nil {
+// 		helpers.WebResponseWithJSON(c, http.StatusBadRequest, err.Error(), nil)
+// 		return
+// 	}
 
-	helpers.WebResponseWithJSON(c, http.StatusOK, "OK", nil)
-}
+// 	helpers.WebResponseWithJSON(c, http.StatusOK, "OK", nil)
+// }
