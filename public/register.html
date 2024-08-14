@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .btn a {
+            color: inherit; /* Inherit color from the button */
+            text-decoration: none; /* Remove underline from link */
+            display: block; /* Make the link fill the button */
+            width: 100%; /* Full width of the button */
+            height: 100%; /* Full height of the button */
+            padding: 10px 16px; /* Inherit padding from button (adjust if needed) */
+        }
+
+        .btn a:hover {
+            color: inherit; /* Maintain color on hover */
+            text-decoration: none; /* Keep no underline on hover */
+        }
+    </style>
+</head>
+<body>
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%;">
+        <h2 class="text-center mb-4">Register</h2>
+        <!-- Registration Form -->
+        <form action="http://localhost:8080/register">
+            <div class="mb-3">
+                <label for="firstname" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstname" placeholder="Enter your first name">
+            </div>
+            <div class="mb-3">
+                <label for="lastname" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastname" placeholder="Enter your last name">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter your password">
+            </div>
+            <div class="mb-3">
+                <label for="confirm-password" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm-password" placeholder="Confirm your password">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+        <a href="http://localhost:8080/login">Already have an account.</a>
+        <hr class="my-4">
+        <!-- Alternative Registration Methods -->
+        <div class="d-grid gap-2">
+            <button class="btn btn-danger" type="button">
+                <a href="http://localhost:8080/auth/google">
+                    <i class="bi bi-google"></i> Register with Google
+                </a>
+            </button>
+            <button class="btn btn-dark" type="button">
+                <a href="http://localhost:8080/auth/github">
+                    <i class="bi bi-github"></i> Register with GitHub
+                </a>
+            </button>
+            <button class="btn btn-dark" type="button">
+                <a href="http://localhost:8080/auth/tiktok">
+                    <i class="bi bi-tiktok"></i> Register with TikTok
+                </a>
+            </button>
+            <button class="btn btn-success" type="button">
+                <a href="http://localhost:8080/auth/line">
+                    <i class="bi bi-chat"></i> Register with LINE
+                </a>
+            </button>
+            <button class="btn btn-info" type="button">
+                <a href="http://localhost:8080/auth/x">
+                    <i class="bi bi-twitter"></i> Register with X
+                </a>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</body>
+</html>

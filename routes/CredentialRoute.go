@@ -16,8 +16,8 @@ func CredentialRouteSetup(engin *gin.Engine) {
 	credentialRoute := engin.Group("/credential")
 	{
 		credentialRoute.GET("/currentUser", credentialController.CurrentUser)
-		credentialRoute.GET("/register", credentialController.Register)
-		credentialRoute.GET("/login", credentialController.Login)
-		credentialRoute.GET("/logout", credentialController.LogOut)
+		credentialRoute.POST("/register", credentialController.Register)
+		credentialRoute.POST("/login", credentialController.Login)
+		credentialRoute.POST("/logout", credentialController.LogOut)
 	}
 }

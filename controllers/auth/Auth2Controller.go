@@ -26,17 +26,48 @@ var indexTemplate = `{{range $key,$value:=.Providers}}
 {{end}}`
 
 var userTemplate = `
-<p><a href="/auth/logout/{{.Provider}}">logout</a></p>
-<p>Name: {{.Name}} [{{.LastName}}, {{.FirstName}}]</p>
-<p>Email: {{.Email}}</p>
-<p>NickName: {{.NickName}}</p>
-<p>Location: {{.Location}}</p>
-<p>AvatarURL: {{.AvatarURL}} <img src="{{.AvatarURL}}"></p>
-<p>Description: {{.Description}}</p>
-<p>UserID: {{.UserID}}</p>
-<p>AccessToken: {{.AccessToken}}</p>
-<p>ExpiresAt: {{.ExpiresAt}}</p>
-<p>RefreshToken: {{.RefreshToken}}</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header text-end">
+            <a href="/auth/logout/{{.Provider}}" class="btn btn-danger">Logout</a>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <img src="{{.AvatarURL}}" alt="Avatar" class="img-fluid rounded-circle mb-3" style="max-width: 150px;">
+                    <h3>{{.Name}}</h3>
+                    <p class="text-muted">({{.NickName}})</p>
+                </div>
+                <div class="col-md-8">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Full Name:</strong> {{.FirstName}} {{.LastName}}</li>
+                        <li class="list-group-item"><strong>Email:</strong> {{.Email}}</li>
+                        <li class="list-group-item"><strong>Location:</strong> {{.Location}}</li>
+                        <li class="list-group-item"><strong>Description:</strong> {{.Description}}</li>
+                        <li class="list-group-item"><strong>User ID:</strong> {{.UserID}}</li>
+                        <li class="list-group-item"><strong>Access Token:</strong> {{.AccessToken}}</li>
+                        <li class="list-group-item"><strong>Expires At:</strong> {{.ExpiresAt}}</li>
+                        <li class="list-group-item"><strong>Refresh Token:</strong> {{.RefreshToken}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
 `
 
 type ProviderIndex struct {
