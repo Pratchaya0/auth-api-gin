@@ -7,7 +7,7 @@ type User struct {
 	FirstName             string
 	LastName              string
 	UserName              string
-	Password              string
+	Password              []byte
 	ProfilePicture        string
 	Email                 string
 	AccountNonExpired     string

@@ -21,6 +21,14 @@ func (u *UserUseCase) GetUserByUserName(username string) (models.User, error) {
 	return u.userInterface.GetUserByUserName(username)
 }
 
+func (u *UserUseCase) GetUserById(id string) (models.User, error) {
+	return u.userInterface.GetUserById(id)
+}
+
+func (u *UserUseCase) GetUserByEmail(email string) (models.User, error) {
+	return u.userInterface.GetUserByEmail(email)
+}
+
 // func (u *UserUseCase) GetUserByProviderId(providerID string) (models.User, error) {
 // 	return u.userInterface.GetUserByProviderId(providerID)
 // }

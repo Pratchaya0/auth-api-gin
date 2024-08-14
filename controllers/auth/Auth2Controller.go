@@ -14,6 +14,11 @@ import (
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
 	"github.com/markbates/goth/providers/github"
+	"github.com/markbates/goth/providers/google"
+	"github.com/markbates/goth/providers/line"
+	"github.com/markbates/goth/providers/tiktok"
+	"github.com/markbates/goth/providers/twitter"
+	"github.com/markbates/goth/providers/twitterv2"
 )
 
 var indexTemplate = `{{range $key,$value:=.Providers}}
@@ -51,11 +56,31 @@ func init() {
 		fmt.Println("Error loading .env file")
 	}
 
-	goth.UseProviders(github.New(os.Getenv("GITHUB_KEY"), os.Getenv("GITHUB_SECRET"), "http://localhost:8080/auth/github/callback"))
+	goth.UseProviders(
+		// Use twitterv2 instead of twitter if you only have access to the Essential API Level
+		// the twitter provider uses a v1.1 API that is not available to the Essential Level
+		twitterv2.New(os.Getenv("TWITTER_KEY"), os.Getenv("TWITTER_SECRET"), "http://localhost:3000/auth/twitterv2/callback"),
+		// If you'd like to use authenticate instead of authorize in TwitterV2 provider, use this instead.
+		// twitterv2.NewAuthenticate(os.Getenv("TWITTER_KEY"), os.Getenv("TWITTER_SECRET"), "http://localhost:3000/auth/twitterv2/callback"),
+
+		twitter.New(os.Getenv("TWITTER_KEY"), os.Getenv("TWITTER_SECRET"), "http://localhost:3000/auth/twitter/callback"),
+		// If you'd like to use authenticate instead of authorize in Twitter provider, use this instead.
+		// twitter.NewAuthenticate(os.Getenv("TWITTER_KEY"), os.Getenv("TWITTER_SECRET"), "http://localhost:3000/auth/twitter/callback"),
+
+		github.New(os.Getenv("GITHUB_KEY"), os.Getenv("GITHUB_SECRET"), "http://localhost:8080/auth/github/callback"),
+		google.New(os.Getenv("GOOGLE_KEY"), os.Getenv("GOOGLE_SECRET"), "http://localhost:3000/auth/google/callback"),
+		tiktok.New(os.Getenv("TIKTOK_KEY"), os.Getenv("TIKTOK_SECRET"), "http://localhost:3000/auth/tiktok/callback"),
+		line.New(os.Getenv("LINE_KEY"), os.Getenv("LINE_SECRET"), "http://localhost:3000/auth/line/callback", "profile", "openid", "email"),
+	)
 	gothic.Store = cookie.NewStore([]byte(os.Getenv("SESSION_SECRET")))
 
 	m := map[string]string{
-		"github": "Github",
+		"google":    "Google",
+		"github":    "Github",
+		"tiktok":    "TikTok",
+		"line":      "LINE",
+		"twitter":   "Twitter",
+		"twitterv2": "Twitter",
 	}
 
 	var keys []string
@@ -81,11 +106,8 @@ func (ctrl *Auth2Controller) OAuthIndex(c *gin.Context) {
 }
 
 func (ctrl *Auth2Controller) OAuthStart(c *gin.Context) {
-	fmt.Println("start")
-	fmt.Println("id: " + os.Getenv("GITHUB_KEY"))
-
 	req := c.Request.URL.Query()
-	req.Add("provider", "github")
+	req.Add("provider", c.Param("provider"))
 	c.Request.URL.RawQuery = req.Encode()
 
 	// try to get the user without re-authenticating
@@ -99,7 +121,7 @@ func (ctrl *Auth2Controller) OAuthStart(c *gin.Context) {
 
 func (ctrl *Auth2Controller) OAuthLogout(c *gin.Context) {
 	req := c.Request.URL.Query()
-	req.Add("provider", "github")
+	req.Add("provider", c.Param("provider"))
 	c.Request.URL.RawQuery = req.Encode()
 
 	gothic.Logout(c.Writer, c.Request)
@@ -109,7 +131,7 @@ func (ctrl *Auth2Controller) OAuthLogout(c *gin.Context) {
 
 func (ctrl *Auth2Controller) OAuthCallback(c *gin.Context) {
 	req := c.Request.URL.Query()
-	req.Add("provider", "github")
+	req.Add("provider", c.Param("provider"))
 	c.Request.URL.RawQuery = req.Encode()
 
 	user, err := gothic.CompleteUserAuth(c.Writer, c.Request)

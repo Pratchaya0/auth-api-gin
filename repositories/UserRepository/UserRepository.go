@@ -37,6 +37,14 @@ func (r *UserRepository) GetUserByUserName(username string) (models.User, error)
 	return user, err
 }
 
+func (r *UserRepository) GetUserByEmail(email string) (models.User, error) {
+	var user models.User
+
+	err := r.db.Where(&models.User{Email: email}).First(&user).Error
+
+	return user, err
+}
+
 func (r *UserRepository) GetUserByProviderId(providerID string) ([]models.User, error) {
 	var user []models.User
 
