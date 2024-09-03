@@ -14,6 +14,6 @@ type User struct {
 	AccountNonLock        string
 	CredentialsNonExpired string
 
-	Provider    Provider
-	Authorities []Authority
+	// Provider    Provider			`gorm:foreignKey`
+	// Authorities []Authority
 }

@@ -6,10 +6,10 @@ import (
 )
 
 type UserUseCase struct {
-	userInterface repositories.UserRepository
+	userInterface repositories.UserInterface
 }
 
-func NewUserUseCase(userInterface repositories.UserRepository) *UserUseCase {
+func NewUserUseCase(userInterface repositories.UserInterface) *UserUseCase {
 	return &UserUseCase{userInterface: userInterface}
 }
 

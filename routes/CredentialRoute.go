@@ -10,7 +10,7 @@ import (
 
 func CredentialRouteSetup(engin *gin.Engine) {
 	userRepo := repositories.NewGormUserRepository(database.DB())
-	userUseCase := usecases.NewUserUseCase(*userRepo)
+	userUseCase := usecases.NewUserUseCase(userRepo)
 	credentialController := controllers.NewCredentialController(userUseCase)
 
 	credentialRoute := engin.Group("/credential")

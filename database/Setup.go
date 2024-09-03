@@ -3,6 +3,7 @@ package database
 import (
 	"fmt"
 
+	. "github.com/Pratchaya0/auth-api-gin/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -31,7 +32,10 @@ func SetupDatabase() {
 
 	//Migrate the schema
 	database.AutoMigrate(
-	// Add schema
+		// Add schema
+		&User{},
+		&Provider{},
+		&Authority{},
 	)
 
 	// Assign to global variable
